@@ -9,15 +9,25 @@
         private $numVisualizaciones;
         private $numLikes;
         private $numDownload;
+        private $id;
 
 
-        public function __construct($nombre, $descripcion, $numVisualizaciones = 0, $numLikes = 0, $numDownload = 0)
+        public function __construct($nombre = '', $descripcion = '', $numVisualizaciones = 0, $numLikes = 0, $numDownload = 0)
         {
             $this->nombre = $nombre;
             $this->descripcion = $descripcion;
             $this->numVisualizaciones = $numVisualizaciones;
             $this->numLikes = $numLikes;
             $this->numDownload = $numDownload;
+            $this->id=null;
+        }
+
+         /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
         }
 
 
@@ -123,6 +133,8 @@
                 $this->numDownload = $numDownload;
         }
 
+
+       
     }
 
 

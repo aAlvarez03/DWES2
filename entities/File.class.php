@@ -53,23 +53,31 @@
                 throw new FileException('El archivo no se ha subido mediante el formulario');
             }
             //Cargamos el nombre del fichero
-            $this->fileName = pathinfo($this->file['name'], PATHINFO_FILENAME); // Nombre sin extensión
+            $fileNameAux = $this->fileName;
+            $fileNameAux = pathinfo($this->file['name'], PATHINFO_FILENAME); // Nombre sin extensión
             $extension = pathinfo($this->file['name'], PATHINFO_EXTENSION); // Solo la extensión
-            $ruta = $rutaDestino . $this->fileName . '.' . $extension;
+            $ruta = $rutaDestino . $fileNameAux . '.' . $extension;
 
             // Generar un número secuencial si el archivo ya existe
             $contador = 1;
             while (is_file($ruta)) {
                 // Si existe, no sobreescribo, creo uno nuevo con un numero dependiendo la cantidad de veces que se repite
-                $ruta = $rutaDestino . $this->fileName . '(' . $contador . ')' . '.' . $extension;
+                $ruta = $rutaDestino . $fileNameAux . '(' . $contador . ')' . '.' . $extension;
                 $contador++;
             }
+            if($contador == 1){
+                $this->fileName =  $fileNameAux . '.' . $extension;
+            }else{
+                $this->fileName =  $fileNameAux . '(' . $contador-1 . ')' . '.' . $extension;
+            }
+            
 
             // Muevo el fichero subido del directorio temporal (viene definido en el php.ini)
             if(move_uploaded_file($this->file['tmp_name'], $ruta) === false){
                 //Devuelve false si no se ha podido mover
                 throw new FileException('No se puede mover el fichero a su destino');
             }
+
         }
 
 
@@ -80,16 +88,23 @@
          */
         public function copyFile(string $rutaOrigen, string $rutaDestino){
             // Cargamos el nombre del fichero tanto en la ruta de origen como destino
-            $this->fileName = pathinfo($this->file['name'], PATHINFO_FILENAME);
+            $fileNameAux = $this->fileName;
+            $fileNameAux = pathinfo($this->file['name'], PATHINFO_FILENAME);
             $extension = pathinfo($this->file['name'], PATHINFO_EXTENSION);
-            $origen = $rutaOrigen.$this->fileName.'.'.$extension;
-            $destino = $rutaDestino.$this->fileName.'.'.$extension;
+            $origen = $rutaOrigen.$fileNameAux.'.'.$extension;
+            $destino = $rutaDestino.$fileNameAux.'.'.$extension;
 
             // Compruebo si el archivo ya existe en el directorio destino y no sobreescribo, creo uno nuevo con un numero dependiendo la cantidad de veces que se repite.
             $contador = 1;
             while (is_file($destino)) {
-                $destino = $rutaDestino . $this->fileName . '(' . $contador . ')' . '.' . $extension;
+                $destino = $rutaDestino . $fileNameAux . '(' . $contador . ')' . '.' . $extension;
                 $contador++;
+            }
+
+            if($contador == 1){
+                $this->fileName =  $fileNameAux . '.' . $extension;
+            }else{
+                $this->fileName =  $fileNameAux . '(' . $contador-1 . ')' . '.' . $extension;
             }
 
             if(is_file($origen) === false){
@@ -103,6 +118,7 @@
             if(copy($origen, $destino) === false){
                 throw new FileException("No se ha podido copiar el fichero $origen a $destino");
             }
+
         }
     }
     
