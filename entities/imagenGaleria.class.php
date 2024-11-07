@@ -1,5 +1,6 @@
 <?php
-    class imagenGaleria{
+require_once 'database/IEntity.class.php';
+    class imagenGaleria implements IEntity{
 
         const RUTA_IMAGENES_PORTFOLIO='images/index/portfolio/';
         const RUTA_IMAGENES_GALLERY='images/index/gallery/';
@@ -8,17 +9,17 @@
         private $descripcion;
         private $numVisualizaciones;
         private $numLikes;
-        private $numDownload;
+        private $numDescargas;
         private $id;
 
 
-        public function __construct($nombre = '', $descripcion = '', $numVisualizaciones = 0, $numLikes = 0, $numDownload = 0)
+        public function __construct($nombre = '', $descripcion = '', $numVisualizaciones = 0, $numLikes = 0, $numDescargas = 0)
         {
             $this->nombre = $nombre;
             $this->descripcion = $descripcion;
             $this->numVisualizaciones = $numVisualizaciones;
             $this->numLikes = $numLikes;
-            $this->numDownload = $numDownload;
+            $this->numDescargas = $numDescargas;
             $this->id=null;
         }
 
@@ -116,21 +117,32 @@
         }
 
         /**
-         * Get the value of numDownload
+         * Get the value of numDescargas
          */ 
-        public function getNumDownload():int
+        public function getnumDescargas():int
         {
-                return $this->numDownload;
+                return $this->numDescargas;
         }
 
         /**
-         * Set the value of numDownload
+         * Set the value of numDescargas
          *
          * @return  self
          */ 
-        public function setNumDownload($numDownload):void
+        public function setnumDescargas($numDescargas):void
         {
-                $this->numDownload = $numDownload;
+                $this->numDescargas = $numDescargas;
+        }
+
+        public function toArray() : array{
+                return[
+                        'id' => $this->getId(),
+                        'nombre' => $this->getNombre(),
+                        'descripcion' => $this->getDescripcion(),
+                        'numVisualizaciones' => $this->getNumVisualizaciones(),
+                        'numLikes' => $this->getNumLikes(),
+                        'numDescargas' => $this->getnumDescargas()
+                ];
         }
 
 

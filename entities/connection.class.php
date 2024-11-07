@@ -1,18 +1,21 @@
 <?php
+    require_once 'entities/app.class.php';
     class Connection
     {
         public static function make(){
-            $option = [
-                PDO::MYSQL_ATTR_INIT_COMMAND=>'SET NAMES utf8', //para que utilice utf8
-                PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, // para cuando se produzca un error se genere una excepcion y asi poder capturarlo
-                PDO::ATTR_PERSISTENT=>true // para que no cierre la conexion y mejorar el rendimiento
-            ];
             try{
-                $connection = new PDO('mysql:host=dwes.local;dbname=proyecto;charset=utf8', 'user', 'user', $option);
+                $config = App::get('config')['database']; //Utilizamos el contenedor de servicios para obtener la configuracion
+                $connection = new PDO(
+                    $config['connection'].';dbname='.$config['name'],
+                    $config['username'],
+                    $config['password'],
+                    $config['options']
+                );
             }catch(PDOException $error){
-                die($error->getMessage());
+                // die($error->getMessage());
                 // die es una funcion que muestra el string que se le pasa
                 // y detiene la ejecucion del script
+                throw new AppException(getErrorStrings(ERROR_CON_DB));
             }
             return $connection;
         }

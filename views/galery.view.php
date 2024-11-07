@@ -86,7 +86,7 @@
 							</td>
 							<td><?=$img->getNumVisualizaciones()?></td>
 							<td><?=$img->getNumLikes()?></td>
-							<td><?=$img->getNumDownload()?></td>
+							<td><?=$img->getnumDescargas()?></td>
 						</tr>
 					<?php endforeach;?>
 				</table>

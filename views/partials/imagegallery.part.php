@@ -37,7 +37,7 @@
                         <ul class="list-inline text-center">
                             <li><i class="fa fa-eye"></i><?= $imagen->getNumVisualizaciones()?></li>
                             <li><i class="fa fa-heart"></i> <?= $imagen->getNumLikes()?></li>
-                            <li><i class="fa fa-download"></i> <?= $imagen->getNumDownload()?></li>
+                            <li><i class="fa fa-download"></i> <?= $imagen->getnumDescargas()?></li>
                         </ul>
                     </div>
                 </div>
