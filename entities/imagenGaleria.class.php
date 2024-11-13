@@ -11,9 +11,10 @@ require_once 'database/IEntity.class.php';
         private $numLikes;
         private $numDescargas;
         private $id;
+        private $categoria;
 
 
-        public function __construct($nombre = '', $descripcion = '', $numVisualizaciones = 0, $numLikes = 0, $numDescargas = 0)
+        public function __construct(string $nombre = '', string $descripcion = '', int $categoria = 0, int $numVisualizaciones = 0, int $numLikes = 0, int $numDescargas = 0)
         {
             $this->nombre = $nombre;
             $this->descripcion = $descripcion;
@@ -21,6 +22,8 @@ require_once 'database/IEntity.class.php';
             $this->numLikes = $numLikes;
             $this->numDescargas = $numDescargas;
             $this->id=null;
+            $this->categoria = $categoria;
+            
         }
 
          /**
@@ -134,6 +137,26 @@ require_once 'database/IEntity.class.php';
                 $this->numDescargas = $numDescargas;
         }
 
+
+
+        /**
+         * Get the value of categoria
+         */ 
+        public function getCategoria()
+        {
+                return $this->categoria;
+        }
+
+        /**
+         * Set the value of categoria
+         *
+         * @return  self
+         */ 
+        public function setCategoria($categoria)
+        {
+                $this->categoria = $categoria;
+        }
+
         public function toArray() : array{
                 return[
                         'id' => $this->getId(),
@@ -141,12 +164,14 @@ require_once 'database/IEntity.class.php';
                         'descripcion' => $this->getDescripcion(),
                         'numVisualizaciones' => $this->getNumVisualizaciones(),
                         'numLikes' => $this->getNumLikes(),
-                        'numDescargas' => $this->getnumDescargas()
+                        'numDescargas' => $this->getnumDescargas(),
+                        'categoria' => $this->getCategoria()
                 ];
         }
 
 
        
+
     }
 
 
