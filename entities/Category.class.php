@@ -6,21 +6,33 @@
         private $nombre;
         private $numImagenes;
 
-        public function __construct(string $nombre = '', int $numImagenes = 0)
+        public function __construct(string $nombre ='', int $numImagenes = 0)
         {
             $this->nombre = $nombre;
             $this->numImagenes = $numImagenes;
         }
 
-        /**
-         * Get the value of id
-         */ 
-        public function getId()
-        {
-                return $this->id;
+       // Getters
+
+        public function getId() {
+            return $this->id;
         }
 
-        public function toArray(): array
+        public function getNombre() {
+            return $this->nombre;
+        }
+
+        public function getNumImagenes() {
+            return $this->numImagenes;
+        }
+
+        // Setter de numImagenes
+
+        public function setNumImagenes($numImagenes) {
+            $this->numImagenes = $numImagenes;
+        }
+
+        public function toArray():array
         {
             return [
                 'id'=> $this->id,

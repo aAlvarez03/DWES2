@@ -1,6 +1,6 @@
 <?php
     interface IEntity
     {
-        public function toArray():array;
+        public function toArray() : array;
     }
 ?>

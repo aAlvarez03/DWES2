@@ -8,8 +8,8 @@
 			<h1>GALERIA</h1>
 			<hr>
 
+			<!-- Muestra el mensaje de que todo ha ido bien o el error correspondiente -->
 			<?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
-
 				<div class="alert alert-<?= empty($errores) ? 'info' : 'danger'; ?> alert-dismissibre" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">x</span>
@@ -25,30 +25,7 @@
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>
-
-			<?php
-			/*
-				if(!empty($array_dats)){
-					echo "<div class='alert alert-info'>";
-					echo "<ul>";
-						foreach($array_dats as $dat){
-							echo "<li>".$dat."</li>";
-						}
-					echo "</ul>";
-					echo "</div>";
-				}
-
-				if(!empty($array_error)){
-					echo "<div class='alert alert-danger'>";
-					echo "<ul>";
-						foreach($array_error as $error){
-							echo "<li>".$error."</li>";
-						}
-					echo "</ul>";
-					echo "</div>";
-				}
-					*/
-			?>
+			
 			<form class="form-horizontal" method="post" enctype="multipart/form-data" action="<?= $_SERVER['PHP_SELF'] ?>">
 				<div class="form-group">
 					<div class="col-xs-12">
@@ -61,7 +38,7 @@
 						<label class="label-control">Categoria</label>
 						<select class="form-control" name="categoria">
 							<?php foreach($categorias as $categoria): ?>
-								<option value="<?= $categoria->getId() ?>">
+								<option value="<?=$categoria->getId() ?>">
 									<?= $categoria->getNombre() ?>
 								</option>
 							<?php endforeach; ?>
@@ -89,18 +66,19 @@
 							<th scope="col">Descargas</th>
 						</tr>
 					</thead>
-					<?php foreach($imagenes as $img):?>
+					<?php foreach($imagenes as $imagen):?>
 						<tr>
-							<th scope="row"><?=$img->getId()?></th>
-							<td><img src="<?=$img->getUrlGallery()?>" 
-									alt="<?=$img->getDescripcion()?>"
-									title="<?=$img->getDescripcion()?>"
-									width="100px">
+							<th scope="row"><?=$imagen->getId()?></th>
+							<td>
+								<img src="<?=$imagen->getUrlGallery()?>" 
+								alt="<?=$imagen->getDescripcion()?>"
+								title="<?=$imagen->getDescripcion()?>"
+								width="100px">
 							</td>
-							<td><?=$img->getCategoria()?></td>
-							<td><?=$img->getNumVisualizaciones()?></td>
-							<td><?=$img->getNumLikes()?></td>
-							<td><?=$img->getnumDescargas()?></td>
+							<td><?=$imagenRepositorio->getCategoria($imagen)->getNombre()?></td>
+							<td><?=$imagen->getNumVisualizaciones()?></td>
+							<td><?=$imagen->getNumLikes()?></td>
+							<td><?=$imagen->getnumDescargas()?></td>
 						</tr>
 					<?php endforeach;?>
 				</table>

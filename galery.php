@@ -6,6 +6,9 @@
     require_once 'entities/queryBuilder.class.php';
     require_once 'exceptions/AppException.class.php';
     require_once 'entities/repository/imagenGalleryRepository.class.php';
+    require_once 'entities/repository/categoryRepository.class.php';
+    require_once 'entities/Category.class.php';
+
 
     // Array para guardar los mensajes de errores
     $errores = [];
@@ -19,11 +22,13 @@
     App::bind('config', $config);
     // $queryBuilder = new QueryBuilder('imagenes', 'imagenGaleria');
     $imagenRepositorio = new ImagenGalleryRepository();
+    $categoriaRepositorio = new CategoryRepository();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             
                 $descripcion = trim(htmlspecialchars($_POST['descripcion']));
                 $tiposAceptados = ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'];
+                $categoria = trim(htmlspecialchars($_POST['categoria']));
                 $imagen = new File('imagen', $tiposAceptados);
                 //el parametro fileName es 'imagen' porque asi lo indicamos en el formulario (type='file' name='imagen')
                 // Guardamos la imagen en la galeria
@@ -32,7 +37,7 @@
                 // Si se ha llegado hasta aqui es que no ha habido errores
                 // pasamos la query al siguiente string
                 //Lanzamos la sentencia y vemos si se ha ejecutado correctamente
-                $imagenGaleria = new imagenGaleria($imagen->getFileName(), $descripcion);
+                $imagenGaleria = new imagenGaleria($imagen->getFileName(), $descripcion, $categoria);
                 $imagenRepositorio->save($imagenGaleria);
                 $descripcion='';
                 $mensaje = "Imagen guardada";
@@ -54,6 +59,7 @@
         }
         finally{
             $imagenes = $imagenRepositorio->findAll();
+            $categorias = $categoriaRepositorio->findAll();
         }
     require 'views/galery.view.php';
 ?>

@@ -5,6 +5,7 @@
     define('ERROR_APP_CORE', 11);
     define('ERROR_CON_DB', 12);
     define('ERROR_INS_BD', 13);
+    define('ERROR_NOT_FOUND', 14);
 
 
     $errorStrings[UPLOAD_ERR_OK] = "No hay ningun error.";
@@ -20,6 +21,7 @@
     $errorStrings[ERROR_APP_CORE] = "No se ha encontrado la clave en el contenedor.";
     $errorStrings[ERROR_CON_DB] = "No se ha podido crear la conexión con la base de datos.";
     $errorStrings[ERROR_INS_BD] = "Error al insertar en la BD.";
+    $errorStrings[ERROR_NOT_FOUND] = "No se ha encontrado ningún elemento con ese id";
 
     define('ERROR_STRINGS', $errorStrings);
 
