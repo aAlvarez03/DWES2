@@ -54,17 +54,29 @@ require_once 'entities/app.class.php';
             return $result[0];
         }
 
-        // public function incrementaNumCategoria(int $categoria){
+        // public function executeTransaction(callable $fnExecuteQuerys){
         //     try{
         //         $this->connection->beginTransaction();
-        //         $sql = "UPDATE categorias SET numImagenes=numImagenes+1 WHERE id=$categoria";
-        //         $this->connection->exec($sql);
-        //         $this->connection->commit();
-        //     }catch(Exception $exception){
-        //         throw new Exception(($exception->getMessage()));
-        //         $this->connection->rollBack();
+        //         $fnExecuteQuerys(); //Llamo al callable para que se ejecuten todas las operaciones que sean necesarias realizar
+        //         $this->connection->commit(); //Para confirmar las operaciones pendientes y ejecutar.
+        //     }catch(PDOException $exception){
+        //         $this->connection->rollBack(); //Deshace todos los cambios desde el beginTransaction
+        //         throw new QueryException(ERROR_STRINGS[ERROR_TRANSACTION]);
         //     }
         // }
+
+        // Funcion para incrementar el numero de imagenes que contiene una categoria
+        public function incrementaNumCategoria(int $categoria){
+            try{
+                $this->connection->beginTransaction();
+                $sql = "UPDATE categorias SET numImagenes=numImagenes+1 WHERE id=$categoria";
+                $this->connection->exec($sql);
+                $this->connection->commit();
+            }catch(PDOException $exception){
+                $this->connection->rollBack();
+                throw new QueryException(ERROR_STRINGS[ERROR_TRANSACTION]);
+            }
+        }
 
         public function save(IEntity $entity){
             
@@ -79,9 +91,9 @@ require_once 'entities/app.class.php';
                 $statement = $this->connection->prepare($sql);
                 $statement->execute($parameters);
 
-                // if($entity instanceof imagenGaleria){
-                //     $this->incrementaNumCategoria($entity->getCategoria()); //Si es una imagen lo que hay en la tabla, incrementa el número de imagenes correspondiente en la tabla ccategorias
-                // }
+                if($entity instanceof imagenGaleria){
+                    $this->incrementaNumCategoria($entity->getCategoria()); //Si es una imagen lo que hay en la tabla, incrementa el número de imagenes correspondiente en la tabla categorias
+                }
             }
             catch(PDOException $exception){
                 throw new QueryException(getErrorStrings(ERROR_INS_BD));
