@@ -1,5 +1,6 @@
 <?php
 require_once 'exceptions/AppException.class.php';
+require_once 'utils/strings.php';
     class App
     {
         /**
@@ -14,7 +15,7 @@ require_once 'exceptions/AppException.class.php';
         public static function get(string $key){
             if(!array_key_exists($key, self::$container)){
                 // throw new AppException(ERROR_STRINGS[ERROR_APP_CORE]);
-                throw new AppException(getErrorStrings(ERROR_APP_CORE));
+                throw new AppException(getErrorStrings('APP_CORE'));
             }
             return self::$container[$key];
         }

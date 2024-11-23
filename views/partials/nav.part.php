@@ -20,7 +20,7 @@
               <li class="<?= existeOpcionMenuActivaEnArray(['blog', 'single_post']) ? 'active' : ''?> lien"><a href="<?= esOpcionMenuActiva('blog.php') ? '#' : 'blog.php'?>"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
               <li class="<?= esOpcionMenuActiva('contact') ? 'active' : ''?> lien"><a href=<?= esOpcionMenuActiva('contact.php') ? '#' : 'contact.php'?>><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
               <li class="<?= esOpcionMenuActiva('galery') ? 'active' : ''?> lien"><a href=<?= esOpcionMenuActiva('galery.php') ? '#' : 'galery.php'?>><i class="fa fa-image sr-icons"></i> Galery</a></li>
-              <li class="<?= esOpcionMenuActiva('associates') ? 'active' : ''?>"><a href=<?= esOpcionMenuActiva('associates.php') ? '#' : 'associates.php'?>><i class="fa fa-hand-o-right sr-icons"></i> Associates</a></li>
+              <li class="<?= esOpcionMenuActiva('partners') ? 'active' : ''?>"><a href=<?= esOpcionMenuActiva('partners.php') ? '#' : 'partners.php'?>><i class="fa fa-hand-o-right sr-icons"></i> Partners</a></li>
             </ul>
          </div>
      </div>

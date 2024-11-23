@@ -3,6 +3,7 @@ require_once 'utils/strings.php';
 require_once 'exceptions/queryException.class.php';
 require_once 'exceptions/NotFounException.class.php';
 require_once 'entities/app.class.php';
+
     abstract class QueryBuilder
     {
         /**
@@ -32,7 +33,7 @@ require_once 'entities/app.class.php';
             $pdoStatement = $this->connection->prepare($sql);
 
             if($pdoStatement->execute() === false){
-                throw new QueryException(ERROR_STRINGS[ERROR_EXECUTE_STATEMENT]);
+                throw new QueryException(getErrorStrings('EXECUTE_STATEMENT'));
             }
 
             return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->classEntity);
@@ -49,7 +50,7 @@ require_once 'entities/app.class.php';
             $result = $this->executeQuery($sql);
 
             if(empty($result)){
-                throw new NotFoundException(ERROR_STRINGS[ERROR_NOT_FOUND]);
+                throw new NotFoundException(getErrorStrings('NOT_FOUND'));
             }
             return $result[0];
         }
@@ -74,7 +75,7 @@ require_once 'entities/app.class.php';
                 $this->connection->commit();
             }catch(PDOException $exception){
                 $this->connection->rollBack();
-                throw new QueryException(ERROR_STRINGS[ERROR_TRANSACTION]);
+                throw new QueryException(getErrorStrings('TRANSACTION'));
             }
         }
 
@@ -96,7 +97,7 @@ require_once 'entities/app.class.php';
                 }
             }
             catch(PDOException $exception){
-                throw new QueryException(getErrorStrings(ERROR_INS_BD));
+                throw new QueryException(getErrorStrings('INS_BD'));
             }
             
         }

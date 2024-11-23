@@ -1,15 +1,39 @@
 <?php
-    class Associate
+require_once 'database/IEntity.class.php';
+
+    class Partner implements IEntity
     {
+        private $id;
         private $nombre;
         private $logo;
         private $descripcion;
+        const RUTA_IMAGENES_GALLERY='images/index/gallery/';
 
-        public function __construct($nombre, $logo, $descripcion)
+        public function __construct($nombre='', $logo='', $descripcion='')
         {
+            $this->id = null;         
             $this->nombre = $nombre;
             $this->logo = $logo;
             $this->descripcion = $descripcion;
+        }
+
+
+        // Devuelve el objeto como un array
+
+    public function toArray():array {
+        return [
+            'nombre' => $this->nombre,
+            'logo' => $this->logo,
+            'descripcion' => $this->descripcion
+        ];
+    }
+
+        public function getUrlLogo(){
+                return self::RUTA_IMAGENES_GALLERY.$this->logo;
+        }
+
+        public function getId(){
+                return $this->id;
         }
 
 

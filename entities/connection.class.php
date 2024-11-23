@@ -1,5 +1,8 @@
 <?php
     require_once 'entities/app.class.php';
+    require_once 'utils/strings.php';
+    require_once 'exceptions/AppException.class.php';
+
     class Connection
     {
         public static function make(){
@@ -15,7 +18,7 @@
                 // die($error->getMessage());
                 // die es una funcion que muestra el string que se le pasa
                 // y detiene la ejecucion del script
-                throw new AppException(getErrorStrings(ERROR_CON_DB));
+                throw new AppException(getErrorStrings('CON_DB'));
             }
             return $connection;
         }

@@ -1,6 +1,6 @@
 <?php
-    require __DIR__.'/../exceptions/FileException.class.php';
-    require __DIR__.'/../utils/strings.php';
+    require_once 'exceptions/FileException.class.php';
+    require_once 'utils/strings.php';
     class File
     {
         private $file;
@@ -29,14 +29,14 @@
             //Verificamos si ha habido algún error durante la subida del fichero
             if($this->file['error'] !== UPLOAD_ERR_OK){
                 //Dentro del if verificamos de que tipo ha sido el error
-                $excepcion = ERROR_STRINGS[$this->file['error']] ?? 'No se ha podido subir el fichero';
+                $excepcion = getErrorStrings($this->file['error']) ?? 'No se ha podido subir el fichero';
 
                 throw new FileException($excepcion);
             }
 
             //Comprovamos si el fichero subido es de un tipo de los que tenemos sorportados
             if(in_array($this->file['type'], $arrTypes) === false){
-                throw new FileException('Tipo de fichero no soportado');
+                throw new FileException(getErrorStrings('NOT_SUPP_FILE'));
             }
         }
 
@@ -50,7 +50,7 @@
         public function saveUploadFile(string $rutaDestino){
             //Compruebo que el fichero temporal con el que vamos a trabajar se haya subido previamente por peticion POST
             if(is_uploaded_file($this->file['tmp_name']) === false){
-                throw new FileException('El archivo no se ha subido mediante el formulario');
+                throw new FileException(getErrorStrings('UPLOAD_ERR_PARTIAL'));
             }
             //Cargamos el nombre del fichero
             $fileNameAux = $this->fileName;
@@ -75,7 +75,7 @@
             // Muevo el fichero subido del directorio temporal (viene definido en el php.ini)
             if(move_uploaded_file($this->file['tmp_name'], $ruta) === false){
                 //Devuelve false si no se ha podido mover
-                throw new FileException('No se puede mover el fichero a su destino');
+                throw new FileException(getErrorStrings('MV_UP_FILE'));
             }
 
         }
