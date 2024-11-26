@@ -6,7 +6,7 @@
     require_once 'entities/repository/partnerRepository.class.php';
     require_once 'entities/connection.class.php';
 
-    $error = '';
+    $errores = [];
 
     try{
         $config = require_once 'app/config.php';
@@ -16,7 +16,7 @@
         $imagenRepositorio = new ImagenGalleryRepository();
         $partnerRepositorio = new PartnerRepository();
     }catch(QueryException | AppException $exception){
-        $error = $exception->getMessage();
+        $errores[] = $exception->getMessage();
     }finally{
         /* Llamamos al metodo findAll() para obtener todas las imagenes guardadas en los repositorios */
         $imagenes = $imagenRepositorio->findAll();

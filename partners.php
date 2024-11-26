@@ -6,7 +6,7 @@
     require_once 'entities/imagenGaleria.class.php';
     require_once 'entities/connection.class.php';
 
-    $error = '';
+    $errores = [];
     $mensaje = '';
     $descripcion = '';
 
@@ -20,6 +20,10 @@
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $nombre = trim(htmlspecialchars($_POST['nombre']));
+            if(empty($nombre)){
+               $errores[] = throw new Exception("Tiene que indicar un nombre");
+            }
+            
             $descripcion = trim(htmlspecialchars($_POST['descripcion']));
 
             $tiposAceptados = ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'];
@@ -38,7 +42,7 @@
 
     }catch(FileException | QueryException | AppException | PDOException $exception)
     {
-        $error = $exception->getMessage(); 
+        $errores[] = $exception->getMessage(); 
     }
     finally{
         $asociados = $partnerRepositorio->findAll();
