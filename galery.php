@@ -43,17 +43,7 @@
                 $mensaje = "Imagen guardada";
                 
             }
-        }catch(FileException $exception)
-        {
-            $errores[] = $exception->getMessage();
-        }catch(QueryException $exception)
-        {
-            $errores[] = $exception->getMessage();
-        }catch(AppException $exception)
-        {
-            $errores[] = $exception->getMessage();
-        }
-        catch(PDOException $exception)
+        }catch(FileException | QueryException | AppException | PDOException $exception)
         {
             $errores[] = $exception->getMessage();
         }
