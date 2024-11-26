@@ -30,7 +30,7 @@
 			}
 	
 			if (empty($correo)) {
-				$errores[] = 'La dirección de correo no puede estar vacía';
+				$array_error[] = 'La dirección de correo no puede estar vacía';
 			} else if (filter_var($correo, FILTER_VALIDATE_EMAIL) === false) {
 				$array_error[] = 'La dirección de correo es incorrecta';
 			}
