@@ -34,7 +34,7 @@
                 throw new FileException($excepcion);
             }
 
-            //Comprovamos si el fichero subido es de un tipo de los que tenemos sorportados
+            //Comprobamos si el fichero subido es de un tipo de los que tenemos sorportados
             if(in_array($this->file['type'], $arrTypes) === false){
                 throw new FileException(getErrorStrings('NOT_SUPP_FILE'));
             }

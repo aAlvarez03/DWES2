@@ -16,6 +16,7 @@
 
 		if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+			/* Obtenemos los datos de cada campo con el metodo POST */
 			$nombre = trim(htmlspecialchars($_POST['firstName']));
 			$apellido = trim(htmlspecialchars($_POST['lastName']));
 			$correo = trim(htmlspecialchars($_POST['mail']));
@@ -23,6 +24,7 @@
 			$mensaje = trim(htmlspecialchars($_POST['message']));
 	
 	
+			/* Comprobamos posibles errores */
 			if(empty($_POST['firstName'])){
 				$array_error[] = 'El campo First Name es obligatorio';
 			}
@@ -36,7 +38,8 @@
 			if(empty($_POST['subject'])){
 				$array_error[] = 'El campo Subject es obligatorio';
 			}
-	
+
+			/* Guardamos los datos en un array de datos */	
 			$dats = [
 				'Nombre' => $nombre,
 				'Apellidos' => $apellido,
@@ -45,6 +48,7 @@
 				'Mensaje' => $mensaje
 			];
 
+			/* Si no hay ningún error se crea el mensaje y se guarda en la base de datos */
 			if(empty($array_error)){
 				$mensaje = new Message($nombre, $apellido, $correo, $asunto, $mensaje);
 				$mensajeRepositorio->save($mensaje);
@@ -55,9 +59,5 @@
 		$array_error[] = $exception->getMessage();
 	}
 
-	
-	
-	
-	
 	require 'views/contact.view.php';
 ?>

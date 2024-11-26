@@ -21,11 +21,13 @@
     $config = require_once 'app/config.php';
     App::bind('config', $config);
     // $queryBuilder = new QueryBuilder('imagenes', 'imagenGaleria');
+    /* Creamos los repositorios de la galeria de imagenes y las categorias */
     $imagenRepositorio = new ImagenGalleryRepository();
     $categoriaRepositorio = new CategoryRepository();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             
+                // Obtenemos los datos por medio del metodo POST
                 $descripcion = trim(htmlspecialchars($_POST['descripcion']));
                 $tiposAceptados = ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'];
                 $categoria = trim(htmlspecialchars($_POST['categoria']));
@@ -34,9 +36,8 @@
                 // Guardamos la imagen en la galeria
                 $imagen -> saveUploadFile(imagenGaleria::RUTA_IMAGENES_GALLERY);
                 $imagen ->copyFile(imagenGaleria::RUTA_IMAGENES_GALLERY, imagenGaleria::RUTA_IMAGENES_PORTFOLIO);
-                // Si se ha llegado hasta aqui es que no ha habido errores
-                // pasamos la query al siguiente string
-                //Lanzamos la sentencia y vemos si se ha ejecutado correctamente
+
+                /* Creamos y guardamos la imagen en el repositorio de imagenes */
                 $imagenGaleria = new imagenGaleria($imagen->getFileName(), $descripcion, $categoria);
                 $imagenRepositorio->save($imagenGaleria);
                 $descripcion='';
@@ -48,6 +49,7 @@
             $errores[] = $exception->getMessage();
         }
         finally{
+            /* Mostramos las imagenes de la galeria y las categorias con el metodod findAll() */
             $imagenes = $imagenRepositorio->findAll();
             $categorias = $categoriaRepositorio->findAll();
         }

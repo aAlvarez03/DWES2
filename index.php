@@ -6,16 +6,19 @@
     require_once 'entities/repository/partnerRepository.class.php';
     require_once 'entities/connection.class.php';
 
+    $error = '';
+
     try{
         $config = require_once 'app/config.php';
 	    App::bind('config', $config);
 
-        /* Creamos los objetos de los repositorios para hacer los insert y select en la BD */
+        /* Creamos los objetos de los repositorios para hacer el select en la BD */
         $imagenRepositorio = new ImagenGalleryRepository();
         $partnerRepositorio = new PartnerRepository();
-    }catch(QueryException | AppException $exc){
-        $error = $exc->getMessage();
+    }catch(QueryException | AppException $exception){
+        $error = $exception->getMessage();
     }finally{
+        /* Llamamos al metodo findAll() para obtener todas las imagenes guardadas en los repositorios */
         $imagenes = $imagenRepositorio->findAll();
         $asociados = $partnerRepositorio->findAll();
     } 

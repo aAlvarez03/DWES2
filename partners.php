@@ -6,7 +6,7 @@
     require_once 'entities/imagenGaleria.class.php';
     require_once 'entities/connection.class.php';
 
-    // $errores = [];
+    $error = '';
     $mensaje = '';
     $descripcion = '';
 
@@ -36,20 +36,9 @@
             $mensaje = "Asociado guardado";
         }
 
-    }catch(FileException $exception)
+    }catch(FileException | QueryException | AppException | PDOException $exception)
     {
-        throw new FileException($exception->getMessage());
-        
-    }catch(QueryException $exception)
-    {
-        throw new QueryException($exception->getMessage());
-    }catch(AppException $exception)
-    {
-        throw new AppException($exception->getMessage());
-    }
-    catch(PDOException $exception)
-    {
-        throw new PDOException($exception->getMessage());
+        $error = $exception->getMessage(); 
     }
     finally{
         $asociados = $partnerRepositorio->findAll();

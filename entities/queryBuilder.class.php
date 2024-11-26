@@ -55,17 +55,6 @@ require_once 'entities/app.class.php';
             return $result[0];
         }
 
-        // public function executeTransaction(callable $fnExecuteQuerys){
-        //     try{
-        //         $this->connection->beginTransaction();
-        //         $fnExecuteQuerys(); //Llamo al callable para que se ejecuten todas las operaciones que sean necesarias realizar
-        //         $this->connection->commit(); //Para confirmar las operaciones pendientes y ejecutar.
-        //     }catch(PDOException $exception){
-        //         $this->connection->rollBack(); //Deshace todos los cambios desde el beginTransaction
-        //         throw new QueryException(ERROR_STRINGS[ERROR_TRANSACTION]);
-        //     }
-        // }
-
         // Funcion para incrementar el numero de imagenes que contiene una categoria
         public function incrementaNumCategoria(int $categoria){
             try{
