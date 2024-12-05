@@ -1,17 +1,4 @@
 <?php
-
-// const ERRORS = [
-//     'MV_UP_FILE' => 9,
-//     'EXECUTE_STATEMENT' => 10,
-//     'APP_CORE' => 11,
-//     'CON_DB' => 12,
-//     'INS_BD' => 13,
-//     'NOT_FOUND' => 14,
-//     'TRANSACTION' => 15,
-//     'NOT_SUPP_FILE' => 16,
-// ];
-
-
     function getErrorStrings ($error) {
         $errorDevuelto = match($error){
             UPLOAD_ERR_OK => "No hay ningun error.",
@@ -34,14 +21,6 @@
         } ;
         return $errorDevuelto;
     };
-
-    // function getErrorStrings($errorCode){
-    //     // Verifica si el código de error existe en ERROR_STRINGS
-    //     if (array_key_exists($errorCode, ERROR_STRINGS)) {
-    //         return ERROR_STRINGS[$errorCode];
-    //     }
-    //     return "Error desconocido.";
-    // }
     
 
 ?>

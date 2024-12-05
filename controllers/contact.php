@@ -9,8 +9,6 @@
 
 	try{
 		// Se crea la conexión con la base de datos
-		$config = require_once 'app/config.php';
-	    App::bind('config', $config);
 
 		$mensajeRepositorio = new MessageRepository();
 

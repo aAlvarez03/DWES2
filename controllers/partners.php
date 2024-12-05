@@ -12,8 +12,6 @@
 
     try{
         //Se crea la conexión con la base de datos
-        $config = require_once 'app/config.php';
-        App::bind('config', $config);
 
         //Repositorio que será usado para las operaciones insert y select con la base de datos
         $partnerRepositorio = new PartnerRepository();

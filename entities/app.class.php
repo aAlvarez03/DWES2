@@ -1,6 +1,7 @@
 <?php
 require_once 'exceptions/AppException.class.php';
 require_once 'utils/strings.php';
+require_once 'connection.class.php';
     class App
     {
         /**

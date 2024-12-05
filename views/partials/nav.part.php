@@ -15,12 +15,12 @@
          </div>
          <div class="collapse navbar-collapse navbar-right" id="menu">
             <ul class="nav navbar-nav">
-              <li class="<?= esOpcionMenuActiva('index') ? 'active' : ''?> lien"><a href="<?= esOpcionMenuActiva('index.php') ? '#' : 'index.php'?>"><i class="fa fa-home sr-icons"></i> Home</a></li>
-              <li class="<?= esOpcionMenuActiva('about') ? 'active' : ''?> lien"><a href="<?= esOpcionMenuActiva('about.php') ? '#' : 'about.php'?>"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
-              <li class="<?= existeOpcionMenuActivaEnArray(['blog', 'single_post']) ? 'active' : ''?> lien"><a href="<?= esOpcionMenuActiva('blog.php') ? '#' : 'blog.php'?>"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
-              <li class="<?= esOpcionMenuActiva('contact') ? 'active' : ''?> lien"><a href=<?= esOpcionMenuActiva('contact.php') ? '#' : 'contact.php'?>><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
-              <li class="<?= esOpcionMenuActiva('galery') ? 'active' : ''?> lien"><a href=<?= esOpcionMenuActiva('galery.php') ? '#' : 'galery.php'?>><i class="fa fa-image sr-icons"></i> Galery</a></li>
-              <li class="<?= esOpcionMenuActiva('partners') ? 'active' : ''?>"><a href=<?= esOpcionMenuActiva('partners.php') ? '#' : 'partners.php'?>><i class="fa fa-hand-o-right sr-icons"></i> Partners</a></li>
+              <li class="<?= esOpcionMenuActiva("/index") ? 'active' : ''?> lien"><a href="<?= esOpcionMenuActiva("/index") ? '#' : 'index'?>"><i class="fa fa-home sr-icons"></i> Home</a></li>
+              <li class="<?= esOpcionMenuActiva('/about') ? 'active' : ''?> lien"><a href="<?= esOpcionMenuActiva('/about') ? '#' : 'about'?>"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
+              <li class="<?= existeOpcionMenuActivaEnArray(["/blog", "/single_post"]) ? 'active' : ''?> lien"><a href="<?= esOpcionMenuActiva('/blog') ? '#' : 'blog'?>"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
+              <li class="<?= esOpcionMenuActiva('/contact') ? 'active' : ''?> lien"><a href=<?= esOpcionMenuActiva('/contact') ? '#' : 'contact'?>><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
+              <li class="<?= esOpcionMenuActiva('/gallery') ? 'active' : ''?> lien"><a href=<?= esOpcionMenuActiva('/gallery') ? '#' : 'gallery'?>><i class="fa fa-image sr-icons"></i> Gallery</a></li>
+              <li class="<?= esOpcionMenuActiva('/partners') ? 'active' : ''?>"><a href=<?= esOpcionMenuActiva('/partners') ? '#' : 'partners'?>><i class="fa fa-hand-o-right sr-icons"></i> Partners</a></li>
             </ul>
          </div>
      </div>

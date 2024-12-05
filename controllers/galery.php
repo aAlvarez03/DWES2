@@ -18,8 +18,6 @@
 
     try{
     // Realizamos la conexion a la base de datos
-    $config = require_once 'app/config.php';
-    App::bind('config', $config);
     // $queryBuilder = new QueryBuilder('imagenes', 'imagenGaleria');
     /* Creamos los repositorios de la galeria de imagenes y las categorias */
     $imagenRepositorio = new ImagenGalleryRepository();
