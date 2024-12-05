@@ -1,5 +1,6 @@
 <?php
-    return [
+$router->define(
+    [
         '' => 'controllers/index.php',
         'index' => 'controllers/index.php',
         'about' => 'controllers/about.php',
@@ -8,5 +9,6 @@
         'contact' => 'controllers/contact.php',
         'gallery' => 'controllers/galery.php',
         'single_post' => 'controllers/single_post.php'
-    ];
+    ]
+);
 ?>
