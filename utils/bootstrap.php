@@ -6,4 +6,7 @@
 
     $config = require_once 'app/config.php';
     App::bind('config', $config);
+
+    $router = Router::load('utils/routes.php');
+    App::bind('router', $router);
 ?>
