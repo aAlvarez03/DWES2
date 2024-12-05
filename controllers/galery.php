@@ -12,7 +12,6 @@
 
     // Array para guardar los mensajes de errores
     $errores = [];
-    $mensaje = '';
 
 
     try{

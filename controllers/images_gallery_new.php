@@ -10,6 +10,7 @@
     require_once 'entities/Category.class.php';
 
     $descripcion = '';
+    $mensaje = '';
 
     try{
 
@@ -30,6 +31,10 @@
         $imagenRepositorio->save($imagenGaleria);
         $descripcion='';
         $mensaje = "Imagen guardada";
+
+        // llamada para obtener el Mogolog/Logger y guardar la informacion de la imagen y el mensaje en proyecto.log
+        // info es una funcion propia de la clase Logger.
+        App::get('logger')->log->info($mensaje);
     }catch(FileException | QueryException $e){
         die($e->getMessage());
     }
